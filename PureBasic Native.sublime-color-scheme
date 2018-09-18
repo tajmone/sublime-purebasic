@@ -1,0 +1,200 @@
+// =============================================================================
+// PureBasic Native v0.0.1 (2018-05-13)
+// =============================================================================
+// Copyright (c) Tristano Ajmone, 2018. MIT License.
+// -----------------------------------------------------------------------------
+{
+    "name":   "PureBasic Native",
+    "author": "Tristano Ajmone",
+    "variables":
+    {
+        // ===========================
+        // Native PureBasic IDE Colors
+        // ===========================
+        "black":          "#000000", // Pure Black
+        "blue":           "#0078d7", // Blue
+        "blue_dark":      "#000066", // Dark Blue
+        "blue_electric":  "#0080ff", // Electric Blue ("Azure Radiance")
+        "cream":          "#FFFFDF", // Cream Yellow ("Half and Half")
+        "green":          "#00AAAA", // "Persian Green/Tradewind"
+        "green_dark":     "#006666", // Dark Green  "Blue Stone")
+        "green_light":    "#b0ffa7", // "Persian Green/Tradewind"
+        "grey_dark":      "#808080", // Dark Grey
+        "grey_light":     "#f8f8f8", // Light Grey
+        "orange":         "#ffd000", // Orange
+        "purple":         "#924b72", // Purple
+        "red":            "#ff0000", // Red
+        "white":          "#ffffff", // Pure White
+        "yellow":         "#ffffb7", // Yellow
+
+        // Selection Colors:
+        // Debugger Colors:
+        "cyan":           "#00ffff", // Cyan
+
+        // Left Over Colors from Alan
+        // ==========================
+        "shade2":         "#1b2024", // Even darker
+        "shade1":         "#2d353c", // Darker
+        "base_hue":       "#3f4a54", // Base color
+        "tint1":          "#4b5864", // Less dark
+        "tint2":          "#566573", // Even less less dark
+
+        "tint3":          "#b1d0ec", // Midtone (complement 2 of 'base_hue')
+        "tint4":          "#d3e4f4", // between 'tint3' and 'white'
+
+    },
+    "globals":
+    {
+        "foreground": "var(black)",
+        "background": "var(cream)",
+
+        "caret": "var(black)",
+        "invisibles": "color(var(white) alpha(0.35))",
+        "line_highlight": "var(yellow)", // <= Native Color ... too light, should tweak
+
+        // Accents
+        "misspelling": "color(var(red) alpha(0.5))",
+        "minimap_border": "var(tint3)",
+        "accent": "color(var(red) alpha(0.5))",
+        "fold_marker": "var(yellow)",
+
+        // Gutter
+        "gutter": "var(cream)",
+        "gutter_foreground": "var(grey_dark)",
+
+        // Selection
+        "selection": "var(tint4)",
+        "selection_foreground": "var(black)",
+        "selection_border": "var(tint3)",
+        "selection_border_width": "1",
+        "selection_corner_style": "round",  // round | cut | square
+        "selection_corner_radius": "3.5",   // (only for round or cut)
+        "inactive_selection": "var(grey_dark)",
+        "inactive_selection_foreground": "var(black)",
+
+        // Find
+        "highlight": "var(yellow)",
+        "find_highlight": "var(yellow)",
+        "find_highlight_foreground": "var(black)",
+
+        // Guides
+        "guide": "var(tint2)",
+        "active_guide": "color(var(tint3) alpha(0.6))",
+        "stack_guide":  "color(var(tint3) alpha(0.35))",
+
+        // Brackets
+        "brackets_options": "underline",
+        "brackets_foreground": "color(var(white) alpha(0.65))",
+        "bracket_contents_options": "underline",
+        "bracket_contents_foreground": "color(var(white) alpha(0.65))",
+
+        // Tags
+        "tags_options": "stippled_underline",
+        // "tags_foreground": "var(grey)",
+
+        // Shadows
+        "shadow": "var(black)",
+        "shadow_width": "32", // max: 32
+    },
+    "rules":
+    [
+        {
+        // =====================================================================
+        // COMMENTS
+        // =====================================================================
+        // PB IDE doesn't style comments.
+            "name": "Comment",
+            "scope": "comment",
+            "foreground": "var(green)",
+            // "font_style": "italic"
+        },
+        // =====================================================================
+        // STRINGS
+        // =====================================================================
+        // Native ide uses Electric Blue for Strings, Str Delimiters and Esc.Seq.
+        {
+            "name": "DQ String",
+            "scope": "string.quoted.double",
+            "foreground": "var(blue_electric)",
+        },
+        {
+            "name": "DQ String Delimiters",
+            "scope": "punctuation.definition.string",
+            "foreground": "var(blue_electric)",
+            "foreground": "var(red)",
+
+        },
+        {
+            "name": "Escape Sequences",
+            "scope": "constant.character.escape",
+            "foreground": "var(orange)",
+            // "font_style": "bold",
+        },
+        // =====================================================================
+        // CONSTANTS
+        // =====================================================================
+        {
+            "name": "Constants",
+            "scope": "variable.other.constant, punctuation.definition.variable.other.constant.purebasic",
+            "foreground": "var(purple)",
+        },
+        // {
+        //     "name": "String Delimiters",
+        //     "scope": "punctuation.definition.string string.quoted.single",
+        //     "foreground": "var(orange)",
+        //     "background": "color(var(grey) a(0.0))",
+        //     "font_style": "",
+
+        // },
+        // =====================================================================
+        // KEYWORDS
+        // =====================================================================
+        // {
+        //     "name": "Keywords",
+        //     "scope": "keyword",
+        //     "foreground": "var(red)",
+        //     "font_style": "bold"
+        // },
+        // {
+        //     "name": "Keywords Control",
+        //     "scope": "keyword.control.conditional",
+        //     "foreground": "var(blue)",
+        // },
+
+        // {
+        //     "name": "Import",
+        //     "scope": "keyword.control.import.include",
+        //     "foreground": "var(purple)",
+        // },
+        // =====================================================================
+
+        // {
+        //     "name": "Numbers",
+        //     "scope": "constant.numeric",
+        //     "foreground": "var(purple)",
+        // },
+
+
+        {
+            "name": "Operators",
+            "scope": "keyword.operator",
+            "foreground": "var(red)",
+        },
+
+
+        // ==============================================================================
+        //                                ERRORS & INVALID                               
+        // ==============================================================================
+
+        {
+            "name": "Invalid",
+            "scope": "invalid",
+            "foreground": "var(white)",
+            "background": "var(red)",
+        },
+        {
+            "scope": "message.error",
+            "foreground": "color(var(red) alpha(0.5))",
+        },
+    ]
+}
