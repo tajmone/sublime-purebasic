@@ -1,6 +1,6 @@
 # Sublime PureBasic
 
-    PureBasic 5.62 | Sublime Text 3 Dev Build 3175
+    PureBasic 5.73 | Sublime Text 3 Dev Build 3210
 
 [Sublime Text 3] syntax support for [PureBasic].
 
@@ -31,11 +31,12 @@ I've been working on-and-off at this package in my (very little) spare time.
 I didn't set off with the intention of creating a full-blown package to be distributed on Package Control, rather I wanted to be able to use Sublime Text along with PureBasic's native IDE to speed up those code editing operations that on PB's IDE tend to be tedious and lengthy (PB IDE doesn't even allow you to move lines of code around, let alone enjoy multi-cursors).
 
 Currently this package allows working with PureBasic source files in a fairly decent way, even though the syntax definition is far for complete.
-I've nevertheless decided that it's mature enough for public sharing, and open the doors to contributors and feedback. 
+I've nevertheless decided that it's mature enough for public sharing, and open the doors to contributors and feedback.
 
 Some aspects of PB's native IDE would be hard to incorporate in a ST package — all the debugging and profiling tools, the visual forms-editor, etc. — so chances are that this package will never get beyond offering syntax highlighting for PureBasic, symbols indexing, autocompletions and a few useful snippets.
 
 Besides, keeping any PureBasic syntax up to date with the latest PB release is an intrinsically difficult task, for a number of reasons which I've come to label as «Turnip Blood Issues».
+
 
 ## Turnip Blood Issues
 
@@ -45,7 +46,7 @@ If you've ever tried to create a syntax highlighter definition for the PureBasic
 Obtaining the full list of PureBasic keywords and constants is a much harder task than it might seem at first.
 I've banged my head against it when I started to work on PureBasic definitions for [highlight.js][PB HLjs] and [Highlight][PB HL].
 
-When creating a syntax for an editor, you wish to include only the keywords of the latest PB release, but for syntax highlighters you wish to add up the keywords from every version as the end user might be highlighting new and old code alike.  
+When creating a syntax for an editor, you wish to include only the keywords of the latest PB release, but for syntax highlighters you wish to add up the keywords from every version as the end user might be highlighting new and old code alike.
 
 
 For some unfathomable reasons, this information is not publicly available.
@@ -56,6 +57,14 @@ With the help of user [Marc56us], I've managed to create a set of tools to extra
 I then use the extracted lists from the different PB releases and diff them, to see if new keywords were introduced and/or old one dropped. (see [Syntax Highlighting Guidelines] at [PureBasic Archives]).
 
 If this might sound to you a rather tedious task, well ... _it is_ — as I said, it's like trying to squeeze blood out of a turnip.
+
+> __UPDATE__ — Some time after this project was created, the full source code of PureBasic's IDE was publicly released on GitHub, which also includes the full list of PureBasic keywords:
+>
+> - https://github.com/fantaisie-software/purebasic
+>
+> So it's finally possible to get hold of the keywords list of the latest PB version from the [`KeywordsData.pbi`][KeywordsData.pbi] source file! I still need to come up with some PB code to extract the keywords and export them, and then find a way to track how to update the ST syntax definition; but their availability is surely great news when it comes to maintaining this project updated.
+
+[KeywordsData.pbi]: https://github.com/fantaisie-software/purebasic/blob/devel/PureBasicIDE/KeywordsData.pbi
 
 For the above reasons, trying to keep alive any project related to PureBasic syntax is destined to be a daunting task, and needlessly cumbersome one too — I don't quite understand how the fact that PureBasic is a closed source commercial project justifies not publishing such data; after all one might (reasonably so) argue that the proliferation of third party syntax highlighters for PureBasic would contribute to the language's echosystem and its growth, which in turn should have positive effects on its sales.
 Or that enabling syntax highlighting on PB's forums would be an enhacement of its users' experience (following the example of portals like [Rosetta Code], [Developpez.com] and others which syntax highlight PB code); but the official PB website seems adamant in its resolution to not highlight the source code of its own product.
@@ -74,7 +83,7 @@ Having said that, I can't make any promises that this package will ever reach co
 - Minum requirement: __Sublime Text 3__ BUILD `>=3170` (uses new `.sublime-color-scheme` format).
 - Recomended: bleeding-edge __Sublime Text 3__ [Dev BUILD][ST3 Dev Builds].
 
-This package is being developed using the latests [ST3 Dev Builds], and it might use features not included in the latest stable build; I can't grant that it will work with [ST3 Stable Builds].
+Sublime Text 3 has now reached its end-of-life, since Sublime Text 4 is going to be released soon. Therefore, the distinction between stable and dev builds is no longer meaningful, since ST3 won't be further updated except for security patches.
 
 
 [ST3 Dev Builds]: https://www.sublimetext.com/3dev "Visit Sublime Text 3 Dev Builds page"
@@ -82,7 +91,7 @@ This package is being developed using the latests [ST3 Dev Builds], and it might
 
 # Installation
 
-Create an "`PureBasic`" folder inside "`<data_path>/Packages/`", open a shell inside "`<data_path>/Packages/PureBasic/`" and type:
+Create a "`PureBasic`" folder inside "`<data_path>/Packages/`", open a shell inside "`<data_path>/Packages/PureBasic/`" and type:
 
 ```
 git clone https://github.com/tajmone/sublime-purebasic .
@@ -121,7 +130,7 @@ SOFTWARE.
 ```
 
 <!-----------------------------------------------------------------------------
-                               REFERENCE LINKS                                
+                               REFERENCE LINKS
 ------------------------------------------------------------------------------>
 
 [Sublime Text 3]: https://www.sublimetext.com/ "Visit Sublime Text website"
