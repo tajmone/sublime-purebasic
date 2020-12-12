@@ -1,6 +1,10 @@
-# Sublime PureBasic
+![PureBasic version][pb badge]&nbsp;
+![Sublime Text version][st badge]&nbsp;
+![package version][status badge]&nbsp;
+[![MIT License][license badge]][LICENSE]&nbsp;
+![build status][travis badge]
 
-    PureBasic 5.73 | Sublime Text 3 Dev Build 3210
+# Sublime PureBasic
 
 [Sublime Text 3] syntax support for [PureBasic].
 
@@ -153,5 +157,18 @@ SOFTWARE.
 [Marc56us]: https://www.purebasic.fr/english/memberlist.php?mode=viewprofile&u=11155
 
 [Syntax Highlighting Guidelines]: https://github.com/tajmone/purebasic-archives/tree/master/syntax-highlighting/guidelines
+
+<!-- badges -->
+
+[license badge]: https://img.shields.io/badge/license-MIT-00b5da.svg
+[status badge]: https://img.shields.io/badge/status-alpha-orange "Sublime PureBasic progress status"
+[travis badge]: https://travis-ci.com/tajmone/sublime-purebasic.svg?branch=master "Travis CI Build Status for EditorConfig Validation"
+[pb badge]: https://img.shields.io/badge/PureBasic-5.73-brightgreen "PureBasic version"
+[st badge]: https://img.shields.io/badge/Sublime%20Text-3210-brightgreen "Sublime Text version"
+
+<!-- project files -->
+
+[LICENSE]: ./LICENSE "View License file"
+[validate.sh]: ./validate.sh "View script source"
 
 <!-- EOF -->

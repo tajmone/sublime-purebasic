@@ -1,25 +1,27 @@
-################################################################################
-# PureBasic syntax support for Sublime Text 3                                  #
-# https://github.com/tajmone/sublime-purebasic                                 #
-################################################################################
+##################################################
+#  PureBasic syntax support for Sublime Text 3   #
+#  https://github.com/tajmone/sublime-purebasic  #
+##################################################
 
 # All files, extensions and folders that should be excluded from Git tracking.
 
-## =========
-## PureBasic
-## =========
 
-# PureBASIC Configuration Files
+## PureBasic
+############
 *.pb.cfg
 *.pbi.cfg
+*.pbp
 project.cfg
 
-# PureBASIC Project Files
-*.pbp
 
-## ===============
+## Sublime Text 3
+#################
+*.sublime-project
+*.sublime-workspace
+
+
 ## Misc Work Files
-## ===============
+##################
 
 # Links and URLs
 *.lnk
@@ -29,22 +31,40 @@ project.cfg
 ___*.*
 ___*
 
-## ===========
-## Miscellanea
-## ===========
 
-# Shared/Static Libraries
-*.so
-*.dylib
+## Binary files
+###############
+
+# Object files
+# ------------
+*.elf
+*.ko
+*.o
+*.obj
+
+# Static libraries
+# ----------------
+*.a
+*.la
+*.lib
+*.lo
+
+# Shared objects
+# --------------
 *.dll
+*.dylib
+*.so
+*.so.*
 
-# Binary Executables
-*.exe
+# Executables
+# -----------
 *.app
+*.exe
+*.out
 
-## ===========
+
 ## OS Specific
-## ===========
+##############
 ## Created by https://www.gitignore.io/api/linux,macos,windows
 
 ### Linux ###
@@ -63,6 +83,7 @@ ___*
 .nfs*
 
 ### macOS ###
+
 # General
 .DS_Store
 .AppleDouble
@@ -91,6 +112,7 @@ Temporary Items
 .apdisk
 
 ### Windows ###
+
 # Windows thumbnail cache files
 Thumbs.db
 ehthumbs.db

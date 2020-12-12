@@ -1,140 +1,82 @@
-################################################################################
-# PureBasic syntax support for Sublime Text 3                                  #
-# https://github.com/tajmone/sublime-purebasic                                 #
-################################################################################
+##################################################
+#  PureBasic syntax support for Sublime Text 3   #
+#  https://github.com/tajmone/sublime-purebasic  #
+##################################################
 
 # Set Git's default behaviour to text-files autodetection, in case users don't
 # have `core.autocrlf` set:
 
 * text=auto
 
-# ==============================================================================
-#                    Text Files (EOL Normalization Settings)                    
-# ==============================================================================
-# Explicitly declare all files that are text and tell Git how to handle EOLs:
 
-## =================
-## SOURCE CODE FILES
-## =================
-
-
-## PureBASIC
-## ---------
-*.pb       text
-*.pbi      text
-*.pbp      text
-*.pbf      text
-*.cfg      text
+## Repository Configuration
+###########################
+.editorconfig    text eol=lf
+.travis.yml      text eol=lf
+.gitattributes   text eol=lf
+.gitconfig       text eol=lf
+.gitignore       text eol=lf
+.gitmodules      text eol=lf
 
 
-## ==================
-## SUBLIME TEXT FILES
-## ==================
-*.hidden-tmTheme        text eol=lf
-*.sublime-build         text
-*.sublime-color-scheme  text
-*.sublime-commands      text
-*.sublime-completions   text
-*.sublime-keymap        text
-*.sublime-macro         text
-*.sublime-menu          text
-*.sublime-mousemap      text
-*.sublime-project       text
-*.sublime-settings      text
-*.sublime-snippet       text
-*.sublime-syntax        text
-*.sublime-theme         text
-*.sublime-workspace     text
-*.sublime_metrics       text
-*.sublime_session       text
-*.tmPreferences         text
-*.YAML-propertyList     text
+## PureBasic
+############
+[attr]PureBasic text linguist-language=PureBasic
+*.cfg   text linguist-generated=true
+*.pb    PureBasic
+*.pbf   PureBasic
+*.pbi   PureBasic
+*.pbp   linguist-language=XML linguist-generated=true
 
 
-## ASM (Fasm/Yasm)
-## ---------------
-*.ASM      text
-*.INC      text
-*.asm      text
-*.inc      text
+## Sublime Text 3
+#################
+*.hidden-tmTheme         text  eol=lf  linguist-language=XML
+*.sublime-build          text          linguist-language=JSONC
+*.sublime-color-scheme   text          linguist-language=JSONC
+*.sublime-commands       text          linguist-language=JSONC
+*.sublime-completions    text          linguist-language=JSONC
+*.sublime-keymap         text          linguist-language=JSONC
+*.sublime-macro          text          linguist-language=JSONC
+*.sublime-menu           text          linguist-language=JSONC
+*.sublime-mousemap       text          linguist-language=JSONC
+*.sublime-project        text          linguist-language=JSONC
+*.sublime-settings       text          linguist-language=JSONC
+*.sublime-snippet        text          linguist-language=XML
+*.sublime-syntax         text          linguist-language=YAML
+*.sublime-theme          text          linguist-language=JSONC
+*.sublime-workspace      text          linguist-language=JSONC
+*.sublime_metrics        text          linguist-language=JSONC
+*.sublime_session        text          linguist-language=JSONC
+*.tmLanguage             text          linguist-language=XML
+*.tmPreferences          text          linguist-language=XML
+*.YAML-propertyList      text          linguist-language=YAML
+*.YAML-tmLanguage        text          linguist-language=YAML
 
-## Win Resource Files
-## ------------------
-*.rc       text eol=crlf
 
-## Shell scripts
-## -------------
-*.bat      text eol=crlf
-*.com      text eol=crlf
-*.sh       text eol=lf
-*.ps1      text eol=crlf
+## Shell Scripts
+################
+*.bat   text eol=crlf
+*.com   text eol=crlf
+*.sh    text eol=lf
+*.ps1   text eol=crlf
 
-## ==================
-## MISC. DATA FORMATS
-## ==================
-*.json     text
-*.xml      text
-*.xhtml    text
-*.yaml     text
-*.yml      text
 
-## =================
-## WEB-RELATED FILES
-## =================
-*.htm      text
-*.html     text
-*.css      text
-*.js       text
+## Documentation
+################
+*.md      text
+*.txt     text
+LICENSE   text
 
-## ===================
-## DOCUMENTATION FILES
-## ===================
-AUTHORS      text
-CHANGELOG    text
-CHANGES      text
-CONTRIBUTING text
-COPYING      text
-copyright    text
-*COPYRIGHT*  text
-INSTALL      text
-license      text
-LICENSE      text
-UNLICENSE    text
-NEWS         text
-readme       text
-*README*     text
-TODO         text
-
-## ===================
-## CONFIGURATION FILES
-## ===================
-*.cnf          text
-*.conf         text
-*.config       text
-*.ini          text
-*.prefs        text
-.gitattributes text
-.gitconfig     text
-.gitignore     text
-.gitmodules    text
-
-## ===============
-## PLAIN-TEXT DOCS 
-## ===============
-*.adoc        text
-*.asciidoc    text
-*.markdown    text
-*.md          text
-*.txt         text
 
 # ==============================================================================
-#                                  Binary Files                                 
+#                                  Binary Files
 # ==============================================================================
 # Explicitly declare all files that are binary and shouldn't be modified by Git:
 
-## =================
-## COMPILERS' OUTPUT
-## =================
+
+## Compilers' Output
+####################
 
 ## Executables
 ## -----------
@@ -143,11 +85,11 @@ TODO         text
 
 ## Shared/Dynamic libraries
 ## ------------------------
-*.a     binary
-*.dll   binary
-*.dylib binary
-*.lib   binary
-*.so    binary
+*.a       binary
+*.dll     binary
+*.dylib   binary
+*.lib     binary
+*.so      binary
 
 
 ## Object files
@@ -158,9 +100,8 @@ TODO         text
 *.obj   binary
 
 
-## ========
-## ARCHIVES
-## ========
+## Archives
+###########
 *.7z    binary
 *.gz    binary
 *.jar   binary
@@ -169,63 +110,19 @@ TODO         text
 *.zip   binary
 
 
-## ========
-## GRAPHICS
-## ========
-*.bmp   binary
-*.gif   binary
-*.ico   binary
-*.jpg   binary
-*.jpeg  binary
-*.pdf   binary
-*.png   binary
-*.psd   binary
-*.svg   binary
-*.svgz  binary
-*.tif   binary
-*.tiff  binary
-
-# ==============================================================================
-#                                GitHub Linguist                                
-# ==============================================================================
-#  -- https://github.com/github/linguist
-#
-# Manually define/override some extension so that GitHub's Linguist library can
-# 1) Correctly gather statistics on source files, and
-# 2) Use proper syntax highlighting on GitHub's WebUI.
-
-## -----------------------
-## PureBASIC project files
-## -----------------------
-*.cfg    linguist-generated=true
-*.pbf    linguist-language=PureBasic
-*.pbp    linguist-generated=true
-*.pbp    linguist-language=XML
-
-## ------------------
-## Sublime Text Files
-## ------------------
-*.hidden-tmTheme        linguist-language=XML
-*.sublime-build         linguist-language=JSON
-*.sublime-color-scheme  linguist-language=JSON
-*.sublime-commands      linguist-language=JSON
-*.sublime-completions   linguist-language=JSON
-*.sublime-keymap        linguist-language=JSON
-*.sublime-macro         linguist-language=JSON
-*.sublime-menu          linguist-language=JSON
-*.sublime-mousemap      linguist-language=JSON
-*.sublime-project       linguist-language=JSON
-*.sublime-settings      linguist-language=JSON
-*.sublime-snippet       linguist-language=XML
-*.sublime-syntax        linguist-language=YAML
-*.sublime-theme         linguist-language=JSON
-*.sublime-workspace     linguist-language=JSON
-*.sublime_metrics       linguist-language=JSON
-*.sublime_session       linguist-language=JSON
-*.tmLanguage            linguist-language=XML
-*.tmPreferences         linguist-language=XML
-*.YAML-propertyList     linguist-language=YAML
-*.YAML-tmLanguage       linguist-language=YAML
-
+## Graphics
+###########
+*.bmp    binary
+*.gif    binary
+*.ico    binary
+*.jpg    binary
+*.jpeg   binary
+*.pdf    binary
+*.png    binary
+*.psd    binary
+*.svg    binary
+*.svgz   binary
+*.tif    binary
+*.tiff   binary
 
 # EOF

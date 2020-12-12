@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-# "PureBasic.sublime-syntax" v0.0.5 (2020-12-12) | PureBasic 5.73
+# "PureBasic.sublime-syntax"                       v0.0.6 | 2020-12-12 | PB 5.73
 # ==============================================================================
 #                                PureBasic Syntax
 # ==============================================================================
@@ -77,8 +77,8 @@ contexts:
     # PARENTHESES
     #############
     - match: \(
-      scope: keyword.operator.purebasic
-             punctuation.section.parens.begin.purebasic
+      scope:  keyword.operator.purebasic
+              punctuation.section.parens.begin.purebasic
       push: parentheses
 
     # Handle stray parentheses
@@ -90,8 +90,8 @@ contexts:
     # BRACKETS
     ##########
     - match: \[
-      scope: keyword.operator.purebasic
-             punctuation.section.brackets.begin.purebasic
+      scope:  keyword.operator.purebasic
+              punctuation.section.brackets.begin.purebasic
       push: brackets
 
     # Handle stray brackets
@@ -99,12 +99,12 @@ contexts:
     - match: \]
       scope: invalid.illegal.stray-bracket-end.purebasic
 
-     ########
-     # BRACES
-     ########
+    ########
+    # BRACES
+    ########
     - match: \{
-      scope: keyword.operator.purebasic
-             punctuation.section.braces.begin.purebasic
+      scope:  keyword.operator.purebasic
+              punctuation.section.braces.begin.purebasic
       push: braces
 
     # Handle stray braces
@@ -235,24 +235,24 @@ contexts:
   parentheses:
     - meta_scope: meta.group.purebasic
     - match: \)
-      scope: keyword.operator.purebasic
-             punctuation.section.parens.end.purebasic
+      scope:  keyword.operator.purebasic
+              punctuation.section.parens.end.purebasic
       pop: true
     - include: main
 
   brackets:
     - meta_scope: meta.brackets.purebasic
     - match: \]
-      scope: keyword.operator.purebasic
-             punctuation.section.brackets.end.purebasic
+      scope:  keyword.operator.purebasic
+              punctuation.section.brackets.end.purebasic
       pop: true
     - include: main
 
   braces:
     - meta_scope: meta.braces.purebasic
     - match: \}
-      scope: keyword.operator.purebasic
-             punctuation.section.braces.end.purebasic
+      scope:  keyword.operator.purebasic
+              punctuation.section.braces.end.purebasic
       pop: true
     - include: main
 
