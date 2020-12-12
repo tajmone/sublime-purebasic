@@ -1,4 +1,4 @@
-; SYNTAX TEST "Packages/PureBasic/PureBasic.sublime-syntax"
+﻿; SYNTAX TEST "Packages/PureBasic/PureBasic.sublime-syntax"
 
 ; A comment line
 ; <- punctuation.definition.comment.purebasic

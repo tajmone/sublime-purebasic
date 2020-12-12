@@ -1,4 +1,4 @@
-; SYNTAX TEST "Packages/PureBasic/PureBasic.sublime-syntax"
+﻿; SYNTAX TEST "Packages/PureBasic/PureBasic.sublime-syntax"
 
 plainStr$ = "Just a string!"
 ;           ^^^^^^^^^^^^^^^^ string.quoted.double
