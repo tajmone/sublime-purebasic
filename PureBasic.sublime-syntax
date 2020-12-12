@@ -1,21 +1,22 @@
 %YAML 1.2
 ---
-# "PureBasic.sublime-syntax" v0.0.4 (2018-03-07) | PureBasic 5.62
+# "PureBasic.sublime-syntax" v0.0.5 (2020-12-12) | PureBasic 5.73
 # ==============================================================================
-#                                PureBasic Syntax                               
+#                                PureBasic Syntax
 # ==============================================================================
 # Syntax definition for PureBasic programming language
 # -- http://www.purebasic.com
 # ------------------------------------------------------------------------------
-# Copyright (c) Tristano Ajmone, 2018. MIT License.
-# -- 
+# Copyright (c) Tristano Ajmone, 2018-2020. MIT License.
+# --
 # ------------------------------------------------------------------------------
-#                                   DEV STATUS                                  
+#                                   DEV STATUS
 # ------------------------------------------------------------------------------
   # [x] COMMENTS
   # [x] STRINGS
   #     [x] LITERAL STRINGS: "..."
   #     [x] LITERAL STRINGS WITH ESCAPES: ~"..."
+  #     [x] CHARACTER CONSTANTS: 'a'
   # [x] ESCAPE SEQUENCES (in strings)
   #     [x] detect invalid escape sequences
   # [ ] CONSTANTS
@@ -59,7 +60,7 @@ variables:
     )[a-zA-Z]*\b
 
 contexts:
-  
+
   prototype:
     - include: comments
     - include: numbers
@@ -68,6 +69,7 @@ contexts:
   main:
     - include: string_escapable
     - include: string
+    - include: char_constants
     - include: operators
 
 
@@ -112,7 +114,7 @@ contexts:
 
 
 # ==============================================================================
-#                         BASIC SYNTAX ELEMENTS CONTEXTS                        
+#                         BASIC SYNTAX ELEMENTS CONTEXTS
 # ==============================================================================
 
   ###########
@@ -150,11 +152,29 @@ contexts:
       scope: keyword.operator.bitwise.purebasic
 
 
+  #####################
+  # CHARACTER CONSTANTS
+  #####################
+  # Char constants are scoped as "single-quotes string".
+  # OK: Works fine!
+  char_constants:
+  - match: "'"
+    scope: punctuation.definition.string.begin.purebasic
+    captures:
+      1: string.quoted.single.purebasic
+      2: punctuation.definition.string.begin.purebasic
+    push:
+      - meta_include_prototype: false
+      - meta_scope: string.quoted.single.purebasic
+      - match: "'"
+        scope: punctuation.definition.string.end.purebasic
+        pop: true
+
   #########
   # STRINGS
   #########
-  # OK: Works fine! 
-  string:  
+  # OK: Works fine!
+  string:
   - match: '"'
     scope: punctuation.definition.string.begin.purebasic
     captures:
@@ -170,7 +190,7 @@ contexts:
   ###################
   # STRINGS ESCAPABLE
   ###################
-  # OK: Works fine! 
+  # OK: Works fine!
   # See: http://www.purebasic.com/documentation/reference/general_rules.html
   string_escapable:
     - match: '~"'
@@ -189,8 +209,8 @@ contexts:
   ##################
   # ESCAPE SEQUENCES
   ##################
-  # OK: Works fine! 
-  # 
+  # OK: Works fine!
+  #
   # See: http://www.purebasic.com/documentation/reference/general_rules.html
   # The allowed escape sequences are:
   #    \a -- alarm           Chr(7)
@@ -209,7 +229,7 @@ contexts:
       scope: invalid.illegal.unknown-escape.purebasic
 
 # ==============================================================================
-#                                 OTHER CONTEXTS                                
+#                                 OTHER CONTEXTS
 # ==============================================================================
 
   parentheses:
@@ -219,7 +239,7 @@ contexts:
              punctuation.section.parens.end.purebasic
       pop: true
     - include: main
-      
+
   brackets:
     - meta_scope: meta.brackets.purebasic
     - match: \]
@@ -227,7 +247,7 @@ contexts:
              punctuation.section.brackets.end.purebasic
       pop: true
     - include: main
-      
+
   braces:
     - meta_scope: meta.braces.purebasic
     - match: \}
@@ -235,7 +255,7 @@ contexts:
              punctuation.section.braces.end.purebasic
       pop: true
     - include: main
-      
+
 
   ##########
   # COMMENTS
