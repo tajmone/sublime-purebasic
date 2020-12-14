@@ -1,11 +1,11 @@
 %YAML 1.2
 ---
-# "PureBasic.sublime-syntax"                       v0.0.6 | 2020-12-12 | PB 5.73
+# "PureBasic.sublime-syntax"                       v0.0.7 | 2020-12-14 | PB 5.73
 # ==============================================================================
 #                                PureBasic Syntax
 # ==============================================================================
 # Syntax definition for PureBasic programming language
-# -- http://www.purebasic.com
+# -- https://www.purebasic.com
 # ------------------------------------------------------------------------------
 # Copyright (c) Tristano Ajmone, 2018-2020. MIT License.
 # --
@@ -13,9 +13,10 @@
 #                                   DEV STATUS
 # ------------------------------------------------------------------------------
   # [x] COMMENTS
-  # [x] STRINGS
+  # [ ] STRINGS
   #     [x] LITERAL STRINGS: "..."
   #     [x] LITERAL STRINGS WITH ESCAPES: ~"..."
+  #     [ ] FIXED STRINGS: mystr.s{8}
   #     [x] CHARACTER CONSTANTS: 'a'
   # [x] ESCAPE SEQUENCES (in strings)
   #     [x] detect invalid escape sequences
@@ -30,7 +31,7 @@
   #     [ ] Extensive tests needed for all of them
   # [ ] OPERATORS:
   #     [ ] ASIGNMENT:
-  #         [ ] Need to distinguish context when '=' is asignment or comparison
+  #         [ ] Need to distinguish context when '=' is assignment or comparison
   #     [x] COMPARISON
   #     [x] ARITHMETIC
   #     [x] LOGICAL
@@ -67,10 +68,9 @@ contexts:
     - include: constants
 
   main:
-    - include: string_escapable
-    - include: string
+    - include: strings
     - include: char_constants
-    - include: operators
+    - include: operators_all
 
 
     #############
@@ -117,81 +117,98 @@ contexts:
 #                         BASIC SYNTAX ELEMENTS CONTEXTS
 # ==============================================================================
 
-  ###########
-  # OPERATORS
-  ###########
-  # = + - * / & | ~ ( ) < > <= =< >= => <> << >> %
-  # All in one ReGex: '=|\+|-|\*|/|&|\||!|~|(|)|<=?|>=?|=<|=>|<>|<<|>>|%'
-  # See: http://www.purebasic.com/documentation/reference/variables.html
-  operators:
-    # FIXME: Currently the syntax doesn't distinguish when '=' is used for
-    #        asignment and when for comparison. This needs to be implemented in
-    #        specifc contexts later on.
-    # ====================
-    # Comparison Operators
-    # ====================
-    # = < > >= => <= =< <>
+# ------------------------------------------------------------------------------
+#                                   OPERATORS
+# ------------------------------------------------------------------------------
+# = + - * / & | ~ ( ) < > <= =< >= => <> << >> %
+# All in one ReGex: '=|\+|-|\*|/|&|\||!|~|(|)|<=?|>=?|=<|=>|<>|<<|>>|%'
+# See: https://www.purebasic.com/documentation/reference/variables.html
+
+# FIXME: Currently the syntax doesn't distinguish when '=' is used for assignment
+#        and when for comparison. This needs to be implemented in specific
+#        contexts later on.
+
+  operators_all:
+    - include: operators_comparison
+    - include: operators_arithmetic
+    - include: operators_logical
+    - include: operators_bitwise
+
+  # Comparison Operators: = < > >= => <= =< <>
+  # ====================
+  operators_comparison:
     - match: <=?|>=?|=<?|=>?|<>
       scope: keyword.operator.comparison.purebasic
-    # ====================
-    # Arithmetic Operators
-    # ====================
+
+  # Arithmetic Operators: + - * / %
+  # ====================
+  operators_arithmetic:
     - match: \+|-|\*|/|%
       scope: keyword.operator.arithmetic.purebasic
-    # ====================
-    # Logical Operators
-    # ====================
-    # And Or XOr Not
+
+  # Logical Operators: And Or XOr Not
+  # =================
+  operators_logical:
     - match: (?i)\b(And|Or|XOr|Not)\b
       scope: keyword.operator.word.purebasic
-    # =================
-    # Bitwise Operators
-    # =================
-    # & | ! ~ << >>
+
+  # Bitwise Operators: & | ! ~ << >>
+  # =================
+  operators_bitwise:
     - match: '&|\||!|~|<<|>>'
       scope: keyword.operator.bitwise.purebasic
 
+# ------------------------------------------------------------------------------
+#                                    STRINGS
+# ------------------------------------------------------------------------------
 
-  #####################
   # CHARACTER CONSTANTS
-  #####################
+  # ===================
   # Char constants are scoped as "single-quotes string".
   # OK: Works fine!
   char_constants:
-  - match: "'"
-    scope: punctuation.definition.string.begin.purebasic
-    captures:
-      1: string.quoted.single.purebasic
-      2: punctuation.definition.string.begin.purebasic
-    push:
-      - meta_include_prototype: false
-      - meta_scope: string.quoted.single.purebasic
-      - match: "'"
-        scope: punctuation.definition.string.end.purebasic
-        pop: true
+    - match: "'"
+      scope: punctuation.definition.string.begin.purebasic
+      captures:
+        1: string.quoted.single.purebasic
+        2: punctuation.definition.string.begin.purebasic
+      push:
+        - meta_include_prototype: false
+        - meta_scope: string.quoted.single.purebasic
+        - match: "'"
+          scope: punctuation.definition.string.end.purebasic
+          pop: true
 
   #########
   # STRINGS
   #########
-  # OK: Works fine!
-  string:
-  - match: '"'
-    scope: punctuation.definition.string.begin.purebasic
-    captures:
-      1: string.quoted.double.purebasic
-      2: punctuation.definition.string.begin.purebasic
-    push:
-      - meta_include_prototype: false
-      - meta_scope: string.quoted.double.purebasic
-      - match: '"'
-        scope: punctuation.definition.string.end.purebasic
-        pop: true
+  # Include all supported string types.
+  # TODO: Add 'string_fixed' definition; e.g.: mystr.s{8}
+  # NOTE: Inclusion order matters!
+  strings:
+    - include: string_escapable
+    - include: string_literal
 
-  ###################
-  # STRINGS ESCAPABLE
-  ###################
+  # STRINGS LITERALS
+  # ================
   # OK: Works fine!
-  # See: http://www.purebasic.com/documentation/reference/general_rules.html
+  string_literal:
+    - match: '"'
+      scope: punctuation.definition.string.begin.purebasic
+      captures:
+        1: string.quoted.double.purebasic
+        2: punctuation.definition.string.begin.purebasic
+      push:
+        - meta_include_prototype: false
+        - meta_scope: string.quoted.double.purebasic
+        - match: '"'
+          scope: punctuation.definition.string.end.purebasic
+          pop: true
+
+  # STRINGS ESCAPABLE
+  # =================
+  # OK: Works fine!
+  # See: https://www.purebasic.com/documentation/reference/general_rules.html
   string_escapable:
     - match: '~"'
       scope: punctuation.definition.string.begin.purebasic
@@ -206,12 +223,11 @@ contexts:
           scope: punctuation.definition.string.end.purebasic
           pop: true
 
-  ##################
   # ESCAPE SEQUENCES
-  ##################
+  # ================
   # OK: Works fine!
-  #
-  # See: http://www.purebasic.com/documentation/reference/general_rules.html
+  # See: https://www.purebasic.com/documentation/reference/general_rules.html
+
   # The allowed escape sequences are:
   #    \a -- alarm           Chr(7)
   #    \b -- backspace       Chr(8)
@@ -257,25 +273,28 @@ contexts:
     - include: main
 
 
-  ##########
-  # COMMENTS
-  ##########
-  # OK: Single line comments, works fine!
-  comments:
-  - match: ;
-    scope: punctuation.definition.comment.purebasic
-    push:
-      - meta_scope: comment.line.purebasic
-      - match: \n
-        pop: true
+# ------------------------------------------------------------------------------
+#                                    COMMENTS
+# ------------------------------------------------------------------------------
+# OK: Single line comments, works fine!
 
-  #########
-  # NUMBERS
-  #########
-  # OK: BUT NEEDS THOROUGH TESTING!
-  # FLOATS NOTE: PureBASIC strips and ignores all suffixes from float numbers.
-  #    Therefore "1.575e+1" and "1.575e+1bananas" are both valid float values
-  #    in PureBASIC code (both yelding the smae value of 15.75).
+  comments:
+    - match: ;
+      scope: punctuation.definition.comment.purebasic
+      push:
+        - meta_scope: comment.line.purebasic
+        - match: \n
+          pop: true
+
+# ------------------------------------------------------------------------------
+#                                    NUMBERS
+# ------------------------------------------------------------------------------
+# OK: But needs thorough testing!
+
+# FLOATS NOTE: PureBASIC strips and ignores all suffixes from float numbers.
+#              Therefore "1.575e+1" and "1.575e+1bananas" are both valid float
+#              values in PureBASIC code (both yielding the same value of 15.75).
+
   numbers:
     - match: '{{num_hex}}'
       scope: constant.numeric.hex.purebasic
@@ -286,14 +305,17 @@ contexts:
     - match: '{{num_dec}}'
       scope: constant.numeric.decimal.purebasic
 
-  ###########
-  # CONSTANTS
-  ###########
-  # Ok: Constants are captured, but I'm still uncertain about which scope
-  #     to use, and if it should capture the '#' or not.
-  # See:
-  # http://www.purebasic.com/documentation/reference/general_rules.html
-  # http://www.purebasic.com/documentation/reference/ug_constants.html
+# ------------------------------------------------------------------------------
+#                                   CONSTANTS
+# ------------------------------------------------------------------------------
+
+# OK: Constants are captured, but I'm still uncertain about which scope to use,
+#     and if it should capture the '#' or not.
+
+# See:
+# https://www.purebasic.com/documentation/reference/general_rules.html
+# https://www.purebasic.com/documentation/reference/ug_constants.html
+
   constants:
     - match: '(#)({{identifier}}\$?)'
       captures:
@@ -304,4 +326,4 @@ contexts:
       # scope: entity.name.constant.purebasic
       # scope: variable.other.constant.purebasic
 
-
+# EOF #
