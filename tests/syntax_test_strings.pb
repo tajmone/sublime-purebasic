@@ -12,6 +12,9 @@ Literal$ = "Just a string!"
 Literal$ =  "\a..\b..\f..\n..\r..\t..\v..\\"
 ;            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^       -constant.character.escape
 
+Malformed$ = "Str without closing dQuote
+;                                       ^ invalid.illegal.newline
+
 ; ==============================================================================
 ;                                Escaped Strings
 ; ==============================================================================
@@ -42,6 +45,9 @@ Escaped$ = ~"\a..\b..\f..\n..\r..\t..\v..\\..\".."
 ;                                          ^^     -constant.character.escape
 ;                                              ^^ -constant.character.escape
 
+Malformed$ = ~"Str without closing dQuote\"
+;                                          ^ invalid.illegal.newline
+
 ; ==============================================================================
 ;                              Character Constants
 ; ==============================================================================
@@ -56,5 +62,8 @@ lettA  = 'A'
 ;        ^^^ string.quoted.single
 dQuote = '"'
 ;        ^^^ string.quoted.single
+
+Malformed = 'X
+;             ^ invalid.illegal.newline
 
 ; /// EOF ///

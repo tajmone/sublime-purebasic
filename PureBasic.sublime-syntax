@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-# "PureBasic.sublime-syntax"                       v0.0.7 | 2020-12-14 | PB 5.73
+# "PureBasic.sublime-syntax"                       v0.0.8 | 2020-12-15 | PB 5.73
 # ==============================================================================
 #                                PureBasic Syntax
 # ==============================================================================
@@ -169,14 +169,13 @@ contexts:
   char_constants:
     - match: "'"
       scope: punctuation.definition.string.begin.purebasic
-      captures:
-        1: string.quoted.single.purebasic
-        2: punctuation.definition.string.begin.purebasic
-      push:
+      set:
         - meta_include_prototype: false
         - meta_scope: string.quoted.single.purebasic
-        - match: "'"
-          scope: punctuation.definition.string.end.purebasic
+        - match: (')|(\n)
+          captures:
+            1: punctuation.definition.string.end.purebasic
+            2: invalid.illegal.newline.purebasic
           pop: true
 
   #########
@@ -195,14 +194,13 @@ contexts:
   string_literal:
     - match: '"'
       scope: punctuation.definition.string.begin.purebasic
-      captures:
-        1: string.quoted.double.purebasic
-        2: punctuation.definition.string.begin.purebasic
-      push:
+      set:
         - meta_include_prototype: false
         - meta_scope: string.quoted.double.purebasic
-        - match: '"'
-          scope: punctuation.definition.string.end.purebasic
+        - match: (")|(\n)
+          captures:
+            1: punctuation.definition.string.end.purebasic
+            2: invalid.illegal.newline.purebasic
           pop: true
 
   # STRINGS ESCAPABLE
@@ -212,15 +210,14 @@ contexts:
   string_escapable:
     - match: '~"'
       scope: punctuation.definition.string.begin.purebasic
-      captures:
-        1: string.quoted.double.ESC.purebasic
-        2: punctuation.definition.string.begin.purebasic
-      push:
+      set:
         - meta_include_prototype: false
         - meta_scope: string.quoted.double.purebasic
         - include: escapes
-        - match: '"'
-          scope: punctuation.definition.string.end.purebasic
+        - match: (")|(\n)
+          captures:
+            1: punctuation.definition.string.end.purebasic
+            2: invalid.illegal.newline.purebasic
           pop: true
 
   # ESCAPE SEQUENCES
