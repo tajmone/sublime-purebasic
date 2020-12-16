@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-# "PureBasic.sublime-syntax"                       v0.0.8 | 2020-12-15 | PB 5.73
+# "PureBasic.sublime-syntax"                   v0.0.9-WIP | 2020-12-16 | PB 5.73
 # ==============================================================================
 #                                PureBasic Syntax
 # ==============================================================================
@@ -71,6 +71,7 @@ contexts:
     - include: strings
     - include: char_constants
     - include: operators_all
+    - include: procedures
 
 
     #############
@@ -240,6 +241,46 @@ contexts:
       scope: constant.character.escape.purebasic
     - match: \\. # Any other escape is invalid
       scope: invalid.illegal.unknown-escape.purebasic
+
+# ==============================================================================
+#                       COMPLEX SYNTAX ELEMENTS CONTEXTS
+# ==============================================================================
+
+############
+# PROCEDURES
+############
+
+# TODO:
+# - [ ] Add ProcedureDLL and ProcedureCDLL
+# - [ ] Create specific scopes for:
+#       - [ ] ProcedureC ('.cdecl' ?)
+#       - [ ] ProcedureDLL
+#       - [ ] ProcedureCDLL
+# - [ ] Create 'params' scope
+# - [ ] Include 'comments' after Proc params
+# - [ ] Support ':' continuation after Proc params?
+
+  procedures:
+    - match: (Procedure|ProcedureC)
+      scope:  storage.type.function.purebasic
+              keyword.declaration.function.begin.purebasic
+      push:
+        - meta_scope: meta.function.purebasic
+        - meta_include_prototype: false
+        - match: '{{identifier}}'
+          scope: entity.name.function.purebasic
+        - match: \n
+          set: procedure_body
+
+  # params:
+
+  procedure_body:
+    - meta_scope: meta.function.purebasic
+    - meta_include_prototype: true
+    - match: EndProcedure
+      scope: keyword.declaration.function.end.purebasic
+      pop: true
+
 
 # ==============================================================================
 #                                 OTHER CONTEXTS
