@@ -86,6 +86,7 @@ contexts:
     - match: \)
       scope: invalid.illegal.stray-parens-end.purebasic
 
+
     ##########
     # BRACKETS
     ##########
@@ -99,6 +100,7 @@ contexts:
     - match: \]
       scope: invalid.illegal.stray-bracket-end.purebasic
 
+
     ########
     # BRACES
     ########
@@ -111,6 +113,131 @@ contexts:
     # ===================
     - match: \}
       scope: invalid.illegal.stray-braces-end.purebasic
+
+
+    ##########
+    # Keywords
+    ##########
+
+    # Compiler
+    # ===================
+    - match: (?i)\b(CompilerIf|CompilerElseIf|CompilerElse|CompilerEndIf|CompilerSelect|CompilerCase|CompilerDefault|CompilerEndSelect|CompilerWarning|CompilerError)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(IncludeBinary|IncludeFile|XIncludeFile|IncludePath)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(DisableDebugger|EnableDebugger|CallDebugger|Debug|DebugLevel)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(EnableExplicit|DisableExplicit)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(EnableASM|DisableASM)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Macro|EndMacro|UndefineMacro|MacroExpandedCount)\b
+      scope: keyword.source.purebasic
+
+    # Program Flow
+    # ===================
+    - match: (?i)\b(Goto|Gosub|FakeReturn|Return)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(If|ElseIf|Else|EndIf)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(And|Not|Or|XOr)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Select|Case|Default|EndSelect)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Repeat|Until|ForEver)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(ForEach|For|To|Step|Next)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(While|Wend)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Break|Continue)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(End)\b
+      scope: keyword.source.purebasic
+
+    # Data
+    # ===================
+    - match: (?i)\b(Define|Dim|ReDim)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Enumeration|EnumerationBinary|EndEnumeration)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Interface|Extends|EndInterface)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(DeclareModule|EndDeclareModule|Module|EndModule|UseModule|UnuseModule)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(NewList)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(NewMap)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Structure|Align|EndStructure|StructureUnion|EndStructureUnion)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(With|EndWith)\b
+      scope: keyword.source.purebasic
+
+
+    - match: (?i)\b(Runtime)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Swap)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Threaded)\b
+      scope: keyword.source.purebasic
+
+
+    - match: (?i)\b(Data|DataSection|EndDataSection|Read|Restore)\b
+      scope: keyword.source.purebasic
+
+
+    - match: (?i)\b(Global|Shared)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Array|List|Map)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Declare|DeclareC|DeclareDLL|DeclareCDLL)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Procedure|ProcedureReturn|EndProcedure|ProcedureC|ProcedureDLL|ProcedureCDLL)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Protected|Static)\b
+      scope: keyword.source.purebasic
+
+
+    - match: (?i)\b(Import|ImportC|EndImport)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Prototype|PrototypeC)\b
+      scope: keyword.source.purebasic
+
+    # ?????
+    # ===================
+    - match: (?i)\b(As)\b
+      scope: keyword.source.purebasic
+
+    - match: (?i)\b(Parallel)\b
+      scope: keyword.source.purebasic
 
 
 # ==============================================================================
