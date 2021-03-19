@@ -1,0 +1,10 @@
+{
+    "selector": "source.purebasic",
+    "cmd": ["C:\\Program Files\\PureBasic\\Compilers\\pbcompiler.exe", "$file"], // Compile and Run current file
+
+    "variants": [
+        //{ "cmd": ["C:\\Program Files\\PureBasic\\Compilers\\pbcompiler.exe", "$file"],
+        //    "name": "Compile..."
+        //}
+    ]
+}
