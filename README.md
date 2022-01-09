@@ -4,6 +4,15 @@
 [![MIT License][license badge]][LICENSE]&nbsp;
 ![build status][travis badge]
 
+> **ARCHIVED!** — This project is deprecated.
+> Use [Peter Horn]'s new package instead:
+>
+> - https://packagecontrol.io/packages/PureBasic
+
+
+[Peter Horn]: https://github.com/peterthomashorn "View Peter Thomas Horn's GitHub profile"
+
+
 # Sublime PureBasic
 
 [Sublime Text 3] syntax support for [PureBasic].
