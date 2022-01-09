@@ -115,6 +115,15 @@ contexts:
 
 
 # ==============================================================================
+#                                HELPERS CONTEXTS
+# ==============================================================================
+
+  bail-out:
+    - match: (?=\S)
+      pop: true
+
+
+# ==============================================================================
 #                         BASIC SYNTAX ELEMENTS CONTEXTS
 # ==============================================================================
 
@@ -246,6 +255,42 @@ contexts:
 #                       COMPLEX SYNTAX ELEMENTS CONTEXTS
 # ==============================================================================
 
+###########
+# PARAMTERS
+###########
+# Shared context for Procedures and native commands parameters.
+# NOTE: Not quite sure yet if it could also be used for Macro parameters too.
+
+  params:
+    - meta_include_prototype: false
+    - match: \(
+      scope: punctuation.section.group.begin
+      set:
+        - meta_include_prototype: false
+        - meta_scope: meta.function.parameters.purebasic
+                      meta.group.purebasic
+        - match: \)
+          scope: punctuation.section.group.end.purebasic
+          pop: true
+        # - include: bail-out
+    - include: bail-out
+
+  # params:
+  #   - match: \(
+  #     scope: punctuation.section.group.begin
+  #     push:
+  #       - meta_scope: meta.function.parameters.purebasic
+  #                     meta.group.purebasic
+  #       - match: \)
+  #         scope: punctuation.section.group.end.purebasic
+  #         pop: true
+  #       - match: \n
+  #         pop: true
+  #       - match: \S+
+  #         scope: xxxx.purebasic
+  #  # - match: '(?=.)'
+  #     # pop: true
+
 ############
 # PROCEDURES
 ############
@@ -261,18 +306,50 @@ contexts:
 # - [ ] Support ':' continuation after Proc params?
 
   procedures:
-    - match: (Procedure|ProcedureC)
-      scope:  storage.type.function.purebasic
-              keyword.declaration.function.begin.purebasic
-      push:
-        - meta_scope: meta.function.purebasic
-        - meta_include_prototype: false
-        - match: '{{identifier}}'
-          scope: entity.name.function.purebasic
-        - match: \n
-          set: procedure_body
+    - match: '\b(Procedure(?:C|DLL)?)(?:(\,)({{identifier}}))?'
+      captures:
+        1: storage.type.function.purebasic keyword.declaration.function.begin.purebasic
+        2: punctuation.storage.type.purebasic
+        3: storage.type.purebasic
+      # scope:  storage.type.function.purebasic
+      #         keyword.declaration.function.begin.purebasic
+      push: procedure_decl
+      # push:
+      #   - procedure_name
+      #   - params
+      #   - procedure_body
 
-  # params:
+      # push:
+      #   - meta_scope: meta.function.purebasic
+      #   - meta_include_prototype: false
+        # - match: '{{identifier}}(?=\s*(\(|$))'
+          # set: params
+
+        # - match: '{{identifier}}'
+        #   scope: entity.name.function.purebasic
+        # - include: params
+        # - match: \n
+        #   set: procedure_body
+
+    # - match: '{{identifier}}(?=\s*(\(|$))'
+    #   scope: meta.function.c entity.name.function.c
+    #   set: function-definition-params
+    # - match: '(?=\S)'
+    #   pop: true
+
+  procedure_decl:
+    - meta_scope: meta.function.purebasic
+    - include: procedure_name
+    - include: params
+    - include: procedure_body
+    - include: bail-out
+
+  procedure_name:
+    - meta_scope: meta.function.purebasic
+    - meta_include_prototype: false
+    - match: '{{identifier}}'
+      scope: entity.name.function.purebasic
+    # - include: bail-out
 
   procedure_body:
     - meta_scope: meta.function.purebasic
@@ -280,7 +357,7 @@ contexts:
     - match: EndProcedure
       scope: keyword.declaration.function.end.purebasic
       pop: true
-
+    # - include: bail-out
 
 # ==============================================================================
 #                                 OTHER CONTEXTS

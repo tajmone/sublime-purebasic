@@ -5,10 +5,13 @@
 ; ==============================================================================
 
 Procedure MyProc()
-;^^^^^^^^^^^^^^^^^  meta.function
-; <-                storage.type.function
-; <-                keyword.declaration.function.begin
+;^^^^^^^^^^^^^^^    meta.function
+;<-                 storage.type.function
+;<-                 keyword.declaration.function.begin
 ;         ^^^^^^    entity.name.function
+;               ^^  meta.group
+;               ^   punctuation.section.parens.begin
+;                ^  punctuation.section.parens.end
   Debug "Hello world!"
 ; ^^^^^^^^^^^^^^^^^^^^  meta.function
 EndProcedure
@@ -23,6 +26,5 @@ Procedure SpacesBeforeParens ()
 ;         ^^^^^^^^^^^^^^^^^^     entity.name.function
   Debug "Hello world!"
 EndProcedure
-
 
 ; /// EOF ///
